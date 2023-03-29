@@ -107,7 +107,7 @@ selectedRows.forEach(e =>
 
     return (
 
-        <div className="container-fluid mt-5">
+        <div className="container mt-5">
         <Navigation logoutUser={logoutUser}/>
         
             <header>
