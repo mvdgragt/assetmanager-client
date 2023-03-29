@@ -43,7 +43,8 @@ const [toggleCleared, setToggleCleared] = useState(false);
         async function getMovements() {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/onloan`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Access-Control-Allow-Origin': '*'
                 }
             });
             const movementsArray = await res.json();
