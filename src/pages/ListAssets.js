@@ -60,7 +60,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     
    useEffect(() => {
         async function getAssets() {
-            const res = await fetch("http://localhost:5000/allAssets", {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allAssets`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -94,7 +94,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     const submitButton = useCallback(() => {
 console.log(selectedRows)
         selectedRows.forEach(e => 
-            fetch(`http://localhost:5000/deleteasset/${e.SerialNumber}`, {
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/deleteasset/${e.SerialNumber}`, {
                 method: "DELETE",
                 headers: 
                 {   "Content-Type": "application/json",

@@ -35,7 +35,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     
    useEffect(() => {
         async function getMovements() {
-            const res = await fetch("http://localhost:5000/notonloan");
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/notonloan`);
             const movementsArray = await res.json();
             setData(movementsArray);
         }
@@ -65,7 +65,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     const submitButton = useCallback(() => {
 
 selectedRows.forEach(e => 
-    fetch(`http://localhost:5000/updates/${e.SerialNumber}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/updates/${e.SerialNumber}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},
     })

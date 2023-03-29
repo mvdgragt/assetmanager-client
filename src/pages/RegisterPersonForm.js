@@ -22,7 +22,7 @@ const RegisterPersonForm = ({token, logoutUser}) => {
       onSubmit={async (values, { resetForm }) => {
         console.log(values)
         await sleep(500);
-        fetch("http://localhost:5000/addNewPerson", {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/addNewPerson`, {
        method: "POST",
        headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
        body: JSON.stringify(values),

@@ -27,7 +27,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
   
    useEffect(() => {
         async function getPersons() {
-            const res = await fetch("http://localhost:5000/persons", {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/persons`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -61,7 +61,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     const submitButton = useCallback(() => {
 console.log(selectedRows)
 selectedRows.forEach(e => 
-    fetch(`http://localhost:5000/persons/${e.ID}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/persons/${e.ID}`, {
         method: "DELETE",
         headers: {'Authorization': `Bearer ${token}`
     },

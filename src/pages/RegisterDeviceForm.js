@@ -20,7 +20,7 @@ const RegisterDeviceForm = ({token, logoutUser}) => {
  // console.log(CostCenter)
   useEffect(() => {
     async function getAssetTypes() {
-      const res = await fetch("http://localhost:5000/assettypes", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/assettypes`, {
           headers: {
               'Authorization': `Bearer ${token}`
           }
@@ -46,7 +46,7 @@ const RegisterDeviceForm = ({token, logoutUser}) => {
       onSubmit={async (values, {resetForm}) => {
         console.log(values);
         await sleep(500);
-        fetch("http://localhost:5000/addNewDevice", {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/addNewDevice`, {
           method: "POST",
           headers: { "Content-type": "application/json", 'Authorization': `Bearer ${token}` },
           body: JSON.stringify(values),
