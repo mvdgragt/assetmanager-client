@@ -91,8 +91,8 @@ const UploadExcel = ({ token, logoutUser }) => {
       const data = XLSX.utils.sheet_to_json(worksheet);
       const slicedData = data.slice(15)
 
-//setExcelData(slicedData)
-//console.log(data)
+// setExcelData(slicedData)
+// console.log(data)
 
       const renamedExcelDataArray = slicedData.map((originalObj) => ({
         'assetnumber': originalObj['SFF-International School of Helsingborg'],
@@ -105,7 +105,23 @@ const UploadExcel = ({ token, logoutUser }) => {
 
       }));
 
-      setExcelData(renamedExcelDataArray)
+      const millisecondsPerDay = 24 * 60 * 60 * 1000;
+      const updatedObjects = renamedExcelDataArray.map(object => {
+        const unixTimestamp = (object.purchasedate - 25569) * 86400 * 1000;
+        const purchaseDate = new Date(unixTimestamp);
+        const formattedDate = purchaseDate.toISOString().split('T')[0];
+        
+        return {
+          ...object,
+          purchasedate: formattedDate
+        };
+      });
+      
+      //console.log(updatedObjects);
+      
+
+
+      setExcelData(updatedObjects)
       // console.log("renamedData :", renamedExcelDataArray)
       return (
         renamedExcelDataArray
