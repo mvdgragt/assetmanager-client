@@ -9,6 +9,7 @@ import AddMovement from './pages/AddMovement'
 import RegisterDeviceForm from "./pages/RegisterDeviceForm";
 import ListAssets from "./pages/ListAssets";
 import Login from "./components/Login";
+import UploadExcel from "./pages/UploadExcel";
 
 function App() {
 
@@ -94,6 +95,7 @@ function App() {
       <Route path="/devices" element={<RegisterDeviceForm token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="registermovement" element={<AddMovement token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="listassets" element={<ListAssets token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
+      <Route path="excelupload" element={<UploadExcel token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
   
         </>
       ): (
