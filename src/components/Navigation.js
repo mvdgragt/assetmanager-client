@@ -2,59 +2,28 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'; 
 import { Button } from "react-bootstrap";
-import { NavLink } from 'react-router-dom';
 
 const Navigation = ({ logoutUser }) => {
   return (
     <Navbar bg="light" variant="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="/">ISH Assetmanager</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink exact to="/listassets" style={{ textDecoration: 'none', color: 'inherit' }} activeStyle={{ textDecoration: 'underline', fontWeight: 'bold' }}>List All Devices</NavLink>
-            <NavLink exact to="/" style={{ textDecoration: 'none', color: 'inherit' }} activeStyle={{ textDecoration: 'underline', fontWeight: 'bold' }}>List All Assets</NavLink>
-            <NavLink exact to="/devices" style={{ textDecoration: 'none', color: 'inherit' }} activeStyle={{ textDecoration: 'underline', fontWeight: 'bold' }}>Register Device</NavLink>
-            <NavLink exact to="/persons" style={{ textDecoration: 'none', color: 'inherit' }} activeStyle={{ textDecoration: 'underline', fontWeight: 'bold' }}>Register Person</NavLink>
-          </Nav>
-          <Nav className="ml-auto">
-            <Button variant="success" onClick={logoutUser}>Logout</Button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <Container>
+      <Navbar.Brand href="/">ISH Assetmanager</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="./listassets" className="text-dark text-decoration-none">List All Devices</Nav.Link>
+          <Nav.Link href="/" className="text-dark text-decoration-none">List All Assets</Nav.Link>
+          <Nav.Link href="./devices" className="text-dark text-decoration-none">Register Device</Nav.Link>
+          <Nav.Link href="./persons" className="text-dark text-decoration-none">Register Person</Nav.Link>
+        </Nav>
+        <Nav className="ml-auto">
+          <Button variant="success" onClick={logoutUser}>Logout</Button>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
+  
   );
 };
 
 export default Navigation;
-
-
-// import Container from 'react-bootstrap/Container';
-// import Nav from 'react-bootstrap/Nav';
-// import Navbar from 'react-bootstrap/Navbar'; 
-// import { Button } from "react-bootstrap";
-
-// const Navigation = ({ logoutUser }) => {
-//   return (
-//     <Navbar bg="light" variant="light" expand="lg">
-//     <Container>
-//       <Navbar.Brand href="/">ISH Assetmanager</Navbar.Brand>
-//       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//       <Navbar.Collapse id="basic-navbar-nav">
-//         <Nav className="me-auto">
-//           <Nav.Link href="./listassets" className="text-dark text-decoration-none">List All Devices</Nav.Link>
-//           <Nav.Link href="/" className="text-dark text-decoration-none">List All Assets</Nav.Link>
-//           <Nav.Link href="./devices" className="text-dark text-decoration-none">Register Device</Nav.Link>
-//           <Nav.Link href="./persons" className="text-dark text-decoration-none">Register Person</Nav.Link>
-//         </Nav>
-//         <Nav className="ml-auto">
-//           <Button variant="success" onClick={logoutUser}>Logout</Button>
-//         </Nav>
-//       </Navbar.Collapse>
-//     </Container>
-//   </Navbar>
-  
-//   );
-// };
-
-// export default Navigation;
