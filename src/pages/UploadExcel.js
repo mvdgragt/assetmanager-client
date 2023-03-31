@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import * as XLSX from 'xlsx'
 import DataTable from 'react-data-table-component';
-import ListAssetsFromUpload from './ListAssetsFromUpload'
+// import ListAssetsFromUpload from './ListAssetsFromUpload'
 
 const columns = [
   {
@@ -198,7 +198,7 @@ for (let i = 0; i < numBatches; i++) {
 
 <hr />
 {totalCost && <h4>To pay this month: {totalCost} SEK</h4>}    
-<ListAssetsFromUpload />
+{/* <ListAssetsFromUpload /> */}
 </div>
   )
 }
