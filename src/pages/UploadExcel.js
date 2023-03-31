@@ -51,7 +51,7 @@ const UploadExcel = ({ token, logoutUser }) => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
   const [totalCost,setTotalCost] = useState(null)
-  const [payThisMonth,setPayThisMonth] = useState(0);
+  // const [payThisMonth,setPayThisMonth] = useState(0);
 
   // submit
   const [excelData, setExcelData] = useState([]);
@@ -86,6 +86,7 @@ const UploadExcel = ({ token, logoutUser }) => {
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
       const slicedData = data.slice(15);
+      
   
      
   
@@ -125,7 +126,39 @@ const UploadExcel = ({ token, logoutUser }) => {
 
       setExcelData(updatedObjects);
       setTotalCost(totalCost);
+      console.log(updatedObjects)
 //      console.log(totalCost)
+
+const batchSize = 100; // Number of objects to send in each batch
+const numBatches = Math.ceil(excelData.length / batchSize);
+
+for (let i = 0; i < numBatches; i++) {
+  const start = i * batchSize;
+  const end = Math.min(start + batchSize, excelData.length);
+  const batch = excelData.slice(start, end);
+
+  const uploadData = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(batch),
+      });
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+      console.log(`Batch ${i+1} uploaded successfully`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  uploadData();
+}
+
     }
   }, [excelFile]);
   
