@@ -126,16 +126,17 @@ const UploadExcel = ({ token, logoutUser }) => {
 
       setExcelData(updatedObjects);
       setTotalCost(totalCost);
-      console.log(updatedObjects)
+ //     console.log(updatedObjects)
 //      console.log(totalCost)
 
 const batchSize = 100; // Number of objects to send in each batch
-const numBatches = Math.ceil(excelData.length / batchSize);
+const numBatches = Math.ceil(updatedObjects.length / batchSize);
+console.log(numBatches)
 
 for (let i = 0; i < numBatches; i++) {
   const start = i * batchSize;
-  const end = Math.min(start + batchSize, excelData.length);
-  const batch = excelData.slice(start, end);
+  const end = Math.min(start + batchSize, updatedObjects.length);
+  const batch = updatedObjects.slice(start, end);
 
   const uploadData = async () => {
     try {
