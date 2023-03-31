@@ -62,8 +62,9 @@ const [toggleCleared, setToggleCleared] = useState(false);
         async function getAssets() {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allAssets`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                    'Authorization': `Bearer ${token}`,                    
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                }
             });
             const assetssArray = await res.json();
             setData(assetssArray);
