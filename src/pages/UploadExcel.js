@@ -144,7 +144,6 @@ const uploadBatch = async (batch) => {
       },
       body: JSON.stringify(batch),
     });
-   // console.log(response)
     if (!response.ok) {
       throw new Error("Upload failed");
     }
