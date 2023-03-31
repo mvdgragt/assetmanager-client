@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import DataTable from 'react-data-table-component';
 import Navigation from "../components/Navigation";
 
-const ListAssets = ({token, logoutUser}) => {
+const ListAssetsFromUpload = ({token, logoutUser}) => {
 
 const columns = [
        {
@@ -59,8 +59,8 @@ const [toggleCleared, setToggleCleared] = useState(false);
     // getMovements()
     
    useEffect(() => {
-        async function getAssets() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allAssets`, {
+        async function getAssetsFromUpload() {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/alluploadedAssets`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,                    
                     'Access-Control-Allow-Origin': '*',
@@ -69,8 +69,9 @@ const [toggleCleared, setToggleCleared] = useState(false);
             });
             const assetssArray = await res.json();
             setData(assetssArray);
+            console.log(assetssArray)
         }
-        getAssets();
+        getAssetsFromUpload();
     }, [toggleCleared]);
 
     const filterData = useCallback((searchTerm) => {
@@ -152,4 +153,4 @@ console.log(selectedRows)
     )
 };
 
-export default ListAssets;
+export default ListAssetsFromUpload;
