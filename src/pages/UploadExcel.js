@@ -159,23 +159,23 @@ fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
 //   }
 // };
 
-const uploadData =  () => {
- // console.log("here!")
-  for (let i = 0; i < numBatches; i++) {
-    const start = i * batchSize;
-    const end = Math.min(start + batchSize, updatedObjects.length);
-    const batch = updatedObjects.slice(start, end);
-    console.log(batch)
+// const uploadData =  () => {
+//  // console.log("here!")
+//   for (let i = 0; i < numBatches; i++) {
+//     const start = i * batchSize;
+//     const end = Math.min(start + batchSize, updatedObjects.length);
+//     const batch = updatedObjects.slice(start, end);
+//     console.log(batch)
 
-     uploadBatch(batch);
+//      uploadBatch(batch);
 
 
-  }
-  console.log(`Batch uploaded successfully`);
+//   }
+//   console.log(`Batch uploaded successfully`);
 
-};
+// };
 
-uploadData();
+// uploadData();
 
 
     }
