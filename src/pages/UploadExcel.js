@@ -134,32 +134,36 @@ const batchSize = 100; // Number of objects to send in each batch
 const numBatches = Math.ceil(updatedObjects.length / batchSize);
 console.log(numBatches)
 
-for (let i = 0; i < numBatches; i++) {
-  const start = i * batchSize;
-  const end = Math.min(start + batchSize, updatedObjects.length);
-  const batch = updatedObjects.slice(start, end);
-
-  const uploadData = async () => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(batch),
-      });
-      if (!response.ok) {
-        throw new Error("Upload failed");
-      }
-      console.log(`Batch ${i+1} uploaded successfully`);
-    } catch (error) {
-      console.error(error);
+const uploadBatch = async (batch) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(batch),
+    });
+    if (!response.ok) {
+      throw new Error("Upload failed");
     }
-  };
+    console.log(`Batch uploaded successfully`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  uploadData();
-}
+const uploadData = async () => {
+  for (let i = 0; i < numBatches; i++) {
+    const start = i * batchSize;
+    const end = Math.min(start + batchSize, updatedObjects.length);
+    const batch = updatedObjects.slice(start, end);
+    await uploadBatch(batch);
+  }
+};
+
+uploadData();
+
 
     }
   }, [excelFile]);
