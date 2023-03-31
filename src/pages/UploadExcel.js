@@ -130,52 +130,46 @@ const UploadExcel = ({ token, logoutUser }) => {
  //     console.log(updatedObjects)
 //      console.log(totalCost)
 
-// fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
-//   method: "POST",
-//   headers: { "Content-type": "application/json", 'Authorization': `Bearer ${token}` },
-//   body: JSON.stringify(excelData),
-// });
+const batchSize = 100; // Number of objects to send in each batch
+const numBatches = Math.ceil(updatedObjects.length / batchSize);
+console.log(numBatches)
 
-// const batchSize = 100; // Number of objects to send in each batch
-// const numBatches = Math.ceil(updatedObjects.length / batchSize);
-// console.log(numBatches)
+const uploadBatch = async (batch) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(batch),
+    });
+    if (!response.ok) {
+      throw new Error("Upload failed");
+    }
+    console.log(`Batch uploaded successfully`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// const uploadBatch = async (batch) => {
-//   try {
-//     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
-//       method: "POST",
-//       headers: {
-//         "Content-type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify(batch),
-//     });
-//     if (!response.ok) {
-//       throw new Error("Upload failed");
-//     }
-//     console.log(`Batch uploaded successfully`);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+const uploadData =  () => {
+ // console.log("here!")
+  for (let i = 0; i < numBatches; i++) {
+    const start = i * batchSize;
+    const end = Math.min(start + batchSize, updatedObjects.length);
+    const batch = updatedObjects.slice(start, end);
+    console.log(batch)
 
-// const uploadData =  () => {
-//  // console.log("here!")
-//   for (let i = 0; i < numBatches; i++) {
-//     const start = i * batchSize;
-//     const end = Math.min(start + batchSize, updatedObjects.length);
-//     const batch = updatedObjects.slice(start, end);
-//     console.log(batch)
-
-//      uploadBatch(batch);
+     uploadBatch(batch);
 
 
-//   }
-//   console.log(`Batch uploaded successfully`);
+  }
+  console.log(`Batch uploaded successfully`);
 
-// };
+};
 
-// uploadData();
+uploadData();
 
 
     }
