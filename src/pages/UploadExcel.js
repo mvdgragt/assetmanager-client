@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import * as XLSX from 'xlsx'
 import DataTable from 'react-data-table-component';
-import Monthlyitems from '../components/Montlyitems'
+import Monthlyitems from '../components/Montlyitems';
+
 const columns = [
   {
     name: 'Asset Number',
@@ -143,6 +144,7 @@ const uploadBatch = async (batch) => {
       },
       body: JSON.stringify(batch),
     });
+   // console.log(response)
     if (!response.ok) {
       throw new Error("Upload failed");
     }
@@ -152,13 +154,20 @@ const uploadBatch = async (batch) => {
   }
 };
 
-const uploadData = async () => {
+const uploadData =  () => {
+ // console.log("here!")
   for (let i = 0; i < numBatches; i++) {
     const start = i * batchSize;
     const end = Math.min(start + batchSize, updatedObjects.length);
     const batch = updatedObjects.slice(start, end);
-    await uploadBatch(batch);
+    console.log(batch)
+
+     uploadBatch(batch);
+
+
   }
+  console.log(`Batch uploaded successfully`);
+
 };
 
 uploadData();
@@ -201,7 +210,7 @@ uploadData();
 
 <hr />
 {totalCost && <h4>To pay this month: {totalCost} SEK</h4>}    
-<Monthlyitems />
+<Monthlyitems token={sessionStorage.getItem("accessToken")} />
 </div>
   )
 }
