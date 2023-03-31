@@ -6,7 +6,7 @@ const Monthlyitems = ({token}) => {
 
     useEffect(() => {
         async function getItems() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/assettypes`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getMontlyUploadList`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
