@@ -127,13 +127,13 @@ const UploadExcel = ({ token, logoutUser }) => {
 
       setExcelData(updatedObjects);
       setTotalCost(totalCost);
-      console.log(excelData)
+  //    console.log(updatedObjects)
 //      console.log(totalCost)
 
 fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
   method: "POST",
   headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
-  body: JSON.stringify(excelData),
+  body: JSON.stringify(updatedObjects),
 });
 
 
