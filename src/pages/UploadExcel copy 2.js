@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import * as XLSX from 'xlsx'
 import DataTable from 'react-data-table-component';
+import Monthlyitems from '../components/Montlyitems';
 
 const columns = [
   {
@@ -128,18 +129,48 @@ const UploadExcel = ({logoutUser}) => {
 
 const batchSize = 100; // Number of objects to send in each batch
 const numBatches = Math.ceil(updatedObjects.length / batchSize);
- console.log(numBatches)
-console.log("updatedObjects", updatedObjects[0])
-// const copyObject = { ...updatedObjects }
-const oneObject = updatedObjects[0];
+console.log(numBatches)
+console.log("updatedObjects", updatedObjects)
 
-
-  fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyupload`, {
+//this is where the data is passed to the server
+const uploadBatch = async (batch) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
       method: "POST",
-       headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
-       body: JSON.stringify(oneObject),
-  });
- 
+      headers: {
+        "Content-type": "application/json", 'Authorization': `Bearer ${token}`, 
+      },
+      body: JSON.stringify(batch),
+    });
+    console.log(response)
+    if (!response.ok) {
+      throw new Error("Upload failed");
+    }
+    console.log(`Batch uploaded successfully`);
+    const data = await response.json()
+    console.log(data)
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const uploadData =  () => {
+  for (let i = 0; i < numBatches; i++) {
+    const start = i * batchSize;
+    const end = Math.min(start + batchSize, updatedObjects.length);
+    const batch = updatedObjects.slice(start, end);
+    console.log(batch)
+
+     uploadBatch(batch);
+
+
+  }
+  console.log(`Batch uploaded successfully`);
+
+};
+
+uploadData();
+
 
     }
   }, [excelFile]);
@@ -178,7 +209,7 @@ const oneObject = updatedObjects[0];
 
 <hr />
 {totalCost && <h4>To pay this month: {totalCost} SEK</h4>}    
-
+<Monthlyitems token={sessionStorage.getItem("accessToken")} />
 </div>
   )
 }
