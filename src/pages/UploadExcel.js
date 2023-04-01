@@ -127,7 +127,7 @@ const UploadExcel = ({ token, logoutUser }) => {
 
       setExcelData(updatedObjects);
       setTotalCost(totalCost);
- //     console.log(updatedObjects)
+      console.log(excelData)
 //      console.log(totalCost)
 
 fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {

@@ -13,7 +13,7 @@ const Monthlyitems = ({token}) => {
             });
             const monthlyAssets = await res.json();
             setData(monthlyAssets);
-            console.log(monthlyAssets)
+      //      console.log(monthlyAssets)
 
 
         }
