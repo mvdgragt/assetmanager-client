@@ -8,8 +8,11 @@ const Monthlyitems = ({token}) => {
         async function getItems() {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getMontlyUploadList`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                }
+                    }
             });
             const monthlyAssets = await res.json();
             setData(monthlyAssets);
