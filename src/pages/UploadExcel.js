@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import * as XLSX from 'xlsx'
 import DataTable from 'react-data-table-component';
-import Monthlyitems from '../components/Montlyitems';
 
 const columns = [
   {
@@ -130,7 +129,50 @@ const UploadExcel = ({logoutUser}) => {
 const batchSize = 100; // Number of objects to send in each batch
 const numBatches = Math.ceil(updatedObjects.length / batchSize);
 console.log(numBatches)
-console.log("updatedObjects", updatedObjects)
+const assets = updatedObjects
+console.log("assets", assets)
+
+
+// assets.forEach(asset => {
+//   for (let value in asset) {
+//       console.log(`${asset[value]}`)
+//   }
+// })
+
+assets.forEach(asset => {
+  async function fetchAssets() {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyupload`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(asset),
+      });
+      const data = await response.json();
+      // do something with the data
+    } catch (error) {
+      // handle the error
+    }
+  }
+//  console.log(asset)
+
+ });
+ 
+
+//  assets.forEach(asset => {
+
+//  fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyupload`, {
+//   method: "POST",
+//   headers: {
+//     "Content-type": "application/json", 'Authorization': `Bearer ${token}`, 
+//   },
+//   body: JSON.stringify(asset),
+// });
+// })
+
+
 
 //this is where the data is passed to the server
 const uploadBatch = async (batch) => {
@@ -140,7 +182,7 @@ const uploadBatch = async (batch) => {
       headers: {
         "Content-type": "application/json", 'Authorization': `Bearer ${token}`, 
       },
-      body: JSON.stringify(batch),
+      body: JSON.stringify(assets),
     });
     console.log(response)
     if (!response.ok) {
@@ -209,7 +251,7 @@ uploadData();
 
 <hr />
 {totalCost && <h4>To pay this month: {totalCost} SEK</h4>}    
-<Monthlyitems token={sessionStorage.getItem("accessToken")} />
+
 </div>
   )
 }
