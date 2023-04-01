@@ -130,45 +130,12 @@ const UploadExcel = ({ token, logoutUser }) => {
  //     console.log(updatedObjects)
 //      console.log(totalCost)
 
-const batchSize = 100; // Number of objects to send in each batch
-const numBatches = Math.ceil(updatedObjects.length / batchSize);
-console.log(numBatches)
+fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+  method: "POST",
+  headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
+  body: JSON.stringify(excelData),
+});
 
-const uploadBatch = async (batch) => {
-  try {
-    // const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
-    const response = await fetch("https://ishassetmanager-server-production.up.railway.app/monthlyEquipmentUpload", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(batch),
-    });
-    if (!response.ok) {
-      throw new Error("Upload failed");
-    }
-    console.log(`Batch uploaded successfully`);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const uploadData =  () => {
- // console.log("here!")
-  for (let i = 0; i < numBatches; i++) {
-    const start = i * batchSize;
-    const end = Math.min(start + batchSize, updatedObjects.length);
-    const batch = updatedObjects.slice(start, end);
-    console.log(batch)
-
-     uploadBatch(batch);
-
-
-  }
-  console.log(`Batch uploaded successfully`);
-
-};
 
 uploadData();
 
