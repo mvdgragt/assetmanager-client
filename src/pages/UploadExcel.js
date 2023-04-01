@@ -136,7 +136,8 @@ console.log(numBatches)
 
 const uploadBatch = async (batch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+    // const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+    const response = await fetch("https://ishassetmanager-server-production.up.railway.app"/monthlyEquipmentUpload, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
