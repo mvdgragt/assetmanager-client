@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import * as XLSX from 'xlsx'
 import DataTable from 'react-data-table-component';
-// import Monthlyitems from '../components/Montlyitems';
+import Monthlyitems from '../components/Montlyitems';
 
 const columns = [
   {
@@ -127,38 +127,49 @@ const UploadExcel = ({ token, logoutUser }) => {
 
       setExcelData(updatedObjects);
       setTotalCost(totalCost);
-     console.log(updatedObjects)
+ //     console.log(updatedObjects)
 //      console.log(totalCost)
 
+const batchSize = 100; // Number of objects to send in each batch
+const numBatches = Math.ceil(updatedObjects.length / batchSize);
+console.log(numBatches)
 
-fetch('https://ishassetmanager-server-production.up.railway.app/monthlyEquipmentUpload', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ updatedObjects })
-})
-  .then(response => {
+const uploadBatch = async (batch) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(batch),
+    });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Upload failed");
     }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-    // Do something with the response data, such as updating your UI
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-    // Handle the error
-  });
+    console.log(`Batch uploaded successfully`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  
-// fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
-//   method: "POST",
-//   headers: { "Content-type": "application/json" },
-//   body: JSON.stringify({updatedObjects}),
-// });
+const uploadData =  () => {
+ // console.log("here!")
+  for (let i = 0; i < numBatches; i++) {
+    const start = i * batchSize;
+    const end = Math.min(start + batchSize, updatedObjects.length);
+    const batch = updatedObjects.slice(start, end);
+    console.log(batch)
+
+     uploadBatch(batch);
+
+
+  }
+  console.log(`Batch uploaded successfully`);
+
+};
+
+uploadData();
 
 
     }
@@ -198,7 +209,7 @@ fetch('https://ishassetmanager-server-production.up.railway.app/monthlyEquipment
 
 <hr />
 {totalCost && <h4>To pay this month: {totalCost} SEK</h4>}    
-{/* <Monthlyitems token={sessionStorage.getItem("accessToken")} /> */}
+<Monthlyitems token={sessionStorage.getItem("accessToken")} />
 </div>
   )
 }
