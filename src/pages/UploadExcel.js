@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import * as XLSX from 'xlsx'
 import DataTable from 'react-data-table-component';
-import Monthlyitems from '../components/Montlyitems';
+// import Monthlyitems from '../components/Montlyitems';
 
 const columns = [
   {
@@ -130,11 +130,35 @@ const UploadExcel = ({ token, logoutUser }) => {
      console.log(updatedObjects)
 //      console.log(totalCost)
 
-fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
-  method: "POST",
-  headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
-  body: JSON.stringify(updatedObjects),
-});
+
+fetch('https://ishassetmanager-server-production.up.railway.app/monthlyEquipmentUpload', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ updatedObjects })
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+    // Do something with the response data, such as updating your UI
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+    // Handle the error
+  });
+
+  
+// fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
+//   method: "POST",
+//   headers: { "Content-type": "application/json" },
+//   body: JSON.stringify({updatedObjects}),
+// });
 
 
     }
@@ -174,7 +198,7 @@ fetch(`${process.env.REACT_APP_BACKEND_URL}/monthlyEquipmentUpload`, {
 
 <hr />
 {totalCost && <h4>To pay this month: {totalCost} SEK</h4>}    
-<Monthlyitems token={sessionStorage.getItem("accessToken")} />
+{/* <Monthlyitems token={sessionStorage.getItem("accessToken")} /> */}
 </div>
   )
 }
