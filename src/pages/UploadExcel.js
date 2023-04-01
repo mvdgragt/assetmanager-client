@@ -80,16 +80,12 @@ const UploadExcel = ({ token, logoutUser }) => {
     }
   }
 
-  useEffect(() => {
     if (excelFile) {
       const workbook = XLSX.read(excelFile, { type: 'buffer' });
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
-      const slicedData = data.slice(15);
-      
-  
-     
+      const slicedData = data.slice(15); 
   
       const renamedExcelDataArray = slicedData.map((originalObj) => ({
         'assetnumber': originalObj['SFF-International School of Helsingborg'],
@@ -123,12 +119,11 @@ const UploadExcel = ({ token, logoutUser }) => {
         }
         return acc;
       }, 0);
-//      console.log(totalCost)
+      console.log("totalCost :", totalCost)
 
       setExcelData(updatedObjects);
       setTotalCost(totalCost);
- //     console.log(updatedObjects)
-//      console.log(totalCost)
+      console.log("updatedObjects :", updatedObjects)
 
 const batchSize = 100; // Number of objects to send in each batch
 const numBatches = Math.ceil(updatedObjects.length / batchSize);
@@ -173,7 +168,6 @@ uploadData();
 
 
     }
-  }, [excelFile]);
   
   return (
     <div className="container mt-5">
