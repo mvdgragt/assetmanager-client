@@ -13,7 +13,7 @@ const AddMovement = ({token}) => {
   //get all registered persons
   useEffect(() => {
     async function fetchPersons() {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getPersons`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/persons`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
