@@ -45,7 +45,7 @@ const AddMovement = ({token}) => {
           <Typeahead
             name="Person"
             id="basic-typeahead-single"
-            labelKey={option => `${option.FirstName} ${option.LastName}`}
+            labelKey={option => `${option.full_name}`}
             onChange={setChosenPerson}
             options={persons}
             placeholder="Choose a person..."
