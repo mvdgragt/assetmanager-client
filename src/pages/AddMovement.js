@@ -41,7 +41,7 @@ const AddMovement = ({token}) => {
   const submit = () => {
     const chosenPersonID = JSON.stringify(chosenPerson[0].personID)
     const chosenDeviceID = JSON.stringify(chosenDevice[0].ID)
-    const data = {chosenPersonID, chosenDeviceID}
+    const data = {chosenPerson, chosenDeviceID}
     console.log(data)
     fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement/`, {
       method: "POST",
