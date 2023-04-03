@@ -60,16 +60,6 @@ function App() {
 
 
       })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
   }
   const logoutUser = () => {
     signOut(auth).then(() => {      
@@ -93,9 +83,9 @@ function App() {
       <Route path="/" element={<ListMovements token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="/persons" element={<RegisterPersonForm token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="/devices" element={<RegisterDeviceForm token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
-      <Route path="registermovement" element={<AddMovement token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
-      <Route path="listassets" element={<ListAssets token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
-      <Route path="excelupload" element={<UploadExcel token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
+      <Route path="/registermovement" element={<AddMovement token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
+      <Route path="/listassets" element={<ListAssets token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
+      <Route path="/excelupload" element={<UploadExcel token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
   
         </>
       ): (

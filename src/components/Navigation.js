@@ -16,6 +16,7 @@ const Navigation = ({ logoutUser }) => {
           <Nav.Link href="./devices" className="text-dark text-decoration-none">Register Device</Nav.Link>
           <Nav.Link href="./persons" className="text-dark text-decoration-none">Register Person</Nav.Link>
           <Nav.Link href="./excelupload" className="text-dark text-decoration-none">Excel Upload</Nav.Link>
+          <Nav.Link href="./registermovement" className="text-dark text-decoration-none">New Booking</Nav.Link>
         </Nav>
         <Nav className="ml-auto">
           <Button variant="success" onClick={logoutUser}>Logout</Button>

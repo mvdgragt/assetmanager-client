@@ -13,7 +13,7 @@ const AddMovement = ({token}) => {
   //get all registered persons
   useEffect(() => {
     async function fetchPersons() {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allPersons`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getPersons`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -24,38 +24,10 @@ const AddMovement = ({token}) => {
     fetchPersons();
   }, []);
 
-
-  //get all devices that are NOT on loan 
-  useEffect(() => {
-    async function fetchDevicesNOTonloan() {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/notonloan`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-      const data = await response.json();
-      setDevices(data);
-    }
-    fetchDevicesNOTonloan();
-  }, []);
-
-  // const submit = () => {
-  //   const chosenPersonID = JSON.stringify(chosenPerson[0].personID)
-  //   const chosenDeviceID = JSON.stringify(chosenDevice[0].ID)
-  //   const data = {chosenPersonID, chosenDeviceID}
-  //   // const data = JSON.stringify({...chosenPerson, ...chosenDevice})
-  //   fetch(`http://localhost:5000/newMovement/`, {
-  //     method: "PUT",
-  //     headers: { "Content-type": "application/json" },
-  //     body: JSON.stringify(data),
-  //   });
-  // };
-
   const submit = () => {
     const chosenPersonID = JSON.stringify(chosenPerson[0].personID)
     const chosenDeviceID = JSON.stringify(chosenDevice[0].ID)
     const data = {chosenPersonID, chosenDeviceID}
-    // const data = JSON.stringify({...chosenPerson, ...chosenDevice})
     fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement/`, {
       method: "POST",
       headers: { "Content-type": "application/json" },

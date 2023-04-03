@@ -41,11 +41,10 @@ const [toggleCleared, setToggleCleared] = useState(false);
     
    useEffect(() => {
         async function getMovements() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/onloan`, {
+            const res = await fetch("http://localhost:5000/onloan", {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                }
+                    'Authorization': `Bearer ${token}`
+                }
             });
             const movementsArray = await res.json();
             setData(movementsArray);
@@ -76,7 +75,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     const submitButton = useCallback(() => {
 
 selectedRows.forEach(e => 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/updates/${e.SerialNumber}`, {
+    fetch(`http://localhost:5000/updates/${e.SerialNumber}`, {
         method: "PUT",
         headers: 
         {   "Content-Type": "application/json",
