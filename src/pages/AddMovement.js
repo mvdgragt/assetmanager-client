@@ -21,7 +21,20 @@ const AddMovement = ({token}) => {
       const data = await response.json();
       setPersons(data);
     }
+
+    async function fetchDevices() {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allAssets`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+      const data = await response.json();
+      setDevices(data);
+    }
+
+
     fetchPersons();
+    fetchDevices();
   }, []);
 
   const submit = () => {
