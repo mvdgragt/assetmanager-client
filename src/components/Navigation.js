@@ -11,8 +11,8 @@ const Navigation = ({ logoutUser }) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="./listassets" className="text-dark text-decoration-none">List All Devices</Nav.Link>
-          <Nav.Link href="/" className="text-dark text-decoration-none">List All Assets</Nav.Link>
+          <Nav.Link href="./listassets" className="text-dark text-decoration-none">Devices</Nav.Link>
+          <Nav.Link href="/" className="text-dark text-decoration-none">Movements</Nav.Link>
           <Nav.Link href="./devices" className="text-dark text-decoration-none">Register Device</Nav.Link>
           <Nav.Link href="./persons" className="text-dark text-decoration-none">Register Person</Nav.Link>
           <Nav.Link href="./excelupload" className="text-dark text-decoration-none">Excel Upload</Nav.Link>
