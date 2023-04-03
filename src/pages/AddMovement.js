@@ -20,6 +20,7 @@ const AddMovement = ({token}) => {
     });
       const data = await response.json();
       setPersons(data);
+      console.log("persons :", data[0])
     }
 
     async function fetchDevices() {
@@ -29,7 +30,7 @@ const AddMovement = ({token}) => {
         }
     });
       const data = await response.json();
-      console.log(data)
+      console.log("allassets :", data[0])
       setDevices(data);
     }
 
