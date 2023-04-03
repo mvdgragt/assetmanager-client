@@ -29,6 +29,7 @@ const AddMovement = ({token}) => {
         }
     });
       const data = await response.json();
+      console.log(data)
       setDevices(data);
     }
 
