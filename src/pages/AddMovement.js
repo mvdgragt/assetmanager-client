@@ -46,6 +46,8 @@ const AddMovement = ({token}) => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(data),
     });
+    alert(JSON.stringify(data, null, 2));
+
   };
 
   return (
