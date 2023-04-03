@@ -84,7 +84,7 @@ function App() {
       <Route path="/persons" element={<RegisterPersonForm token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="/devices" element={<RegisterDeviceForm token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="registermovement" element={<AddMovement token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
-      <Route path="listassets" element={<ListAssets token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
+      <Route path="/listassets" element={<ListAssets token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="/excelupload" element={<UploadExcel token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
   
         </>

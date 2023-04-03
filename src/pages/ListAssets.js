@@ -60,7 +60,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     
    useEffect(() => {
         async function getAssets() {
-            const res = await fetch(`${REACT_APP_BACKEND_URL}/getMovements`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getMovements`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,                    
                     'Access-Control-Allow-Origin': '*',
