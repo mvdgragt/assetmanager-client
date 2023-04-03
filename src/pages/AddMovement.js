@@ -34,6 +34,7 @@ const AddMovement = ({token}) => {
 
 
     fetchPersons();
+    console.log(persons)
     fetchDevices();
   }, []);
 
@@ -41,6 +42,7 @@ const AddMovement = ({token}) => {
     const chosenPersonID = JSON.stringify(chosenPerson[0].personID)
     const chosenDeviceID = JSON.stringify(chosenDevice[0].ID)
     const data = {chosenPersonID, chosenDeviceID}
+    console.log(data)
     fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement/`, {
       method: "POST",
       headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
