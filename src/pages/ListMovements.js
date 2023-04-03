@@ -43,7 +43,9 @@ const [toggleCleared, setToggleCleared] = useState(false);
         async function getMovements() {
             const res = await fetch("http://localhost:5000/onloan", {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                
                 }
             });
             const movementsArray = await res.json();
