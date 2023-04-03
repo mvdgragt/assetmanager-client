@@ -34,7 +34,6 @@ const AddMovement = ({token}) => {
 
 
     fetchPersons();
-    console.log
     fetchDevices();
   }, []);
 
