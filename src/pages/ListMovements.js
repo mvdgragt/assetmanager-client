@@ -43,11 +43,9 @@ const [toggleCleared, setToggleCleared] = useState(false);
         async function getMovements() {
             const res = await fetch(`https://assetmanager-server-production.up.railway.app/onloan`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                
+                    'Authorization': `Bearer ${token}`             
                 }
-            }, {mode: 'cors'}
+            }
 
             );
             const movementsArray = await res.json();
