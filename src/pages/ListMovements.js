@@ -83,7 +83,8 @@ selectedRows.forEach(e =>
         {   "Content-Type": "application/json",
             "Authorization": `Bearer ${token}` 
         },
-    })
+    }, {mode: 'cors'}
+    )
 )
         if (window.confirm(`Are you sure you want to book in the following?:\n ${selectedRows.map(r => r.full_name).join('\n')}`)) {
         setSelectedRows(selectedRows)
