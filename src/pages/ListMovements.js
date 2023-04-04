@@ -41,7 +41,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     
    useEffect(() => {
         async function getMovements() {
-            const res = await fetch(`mysql://root:5NOSSCDlL9LV2b1svlOH@containers-us-west-55.railway.app:6016/railway/onloan`, {
+            const res = await fetch(`https://assetmanager-server-production.up.railway.app`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Access-Control-Allow-Origin': '*',
@@ -77,7 +77,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     const submitButton = useCallback(() => {
 
 selectedRows.forEach(e => 
-    fetch(`mysql://root:5NOSSCDlL9LV2b1svlOH@containers-us-west-55.railway.app:6016/railway/updates/${e.SerialNumber}`, {
+    fetch(`https://assetmanager-server-production.up.railway.app/updates/${e.SerialNumber}`, {
         method: "PUT",
         headers: 
         {   "Content-Type": "application/json",
