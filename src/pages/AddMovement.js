@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typeahead } from 'react-bootstrap-typeahead';
 import Navigation from "../components/Navigation";
 
-const AddMovement = ({token}) => {
+const AddMovement = ({token, logoutUser}) => {
 
   const [persons, setPersons] = useState([]);
   const [chosenPerson, setChosenPerson] = useState([]);
@@ -25,6 +25,7 @@ const AddMovement = ({token}) => {
 
     async function fetchDevices() {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allAssets`, {
+
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -56,7 +57,7 @@ const AddMovement = ({token}) => {
   return (
     <>
       <form className="container mt-5">
-      <Navigation />
+      <Navigation logoutUser={logoutUser}/>
       <h4>Add New Movement</h4>
         <div className="mb-3">
           <label htmlFor="Person">Choose Person</label>

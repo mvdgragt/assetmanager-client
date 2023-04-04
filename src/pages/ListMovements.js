@@ -77,7 +77,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     const submitButton = useCallback(() => {
 
 selectedRows.forEach(e => 
-    fetch(`http://localhost:5000/updates/${e.SerialNumber}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/updates/${e.SerialNumber}`, {
         method: "PUT",
         headers: 
         {   "Content-Type": "application/json",
