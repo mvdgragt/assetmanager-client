@@ -47,7 +47,9 @@ const [toggleCleared, setToggleCleared] = useState(false);
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                
                 }
-            });
+            }, {mode: 'cors'}
+
+            );
             const movementsArray = await res.json();
             setData(movementsArray);
         }
