@@ -41,7 +41,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     
    useEffect(() => {
         async function getMovements() {
-            const res = await fetch(`http://localhost:5000/onloan`, {
+            const res = await fetch(`assetmanager-server-production.up.railway.app/onloan`, {
                 headers: {
                     'Authorization': `Bearer ${token}`             
                 }
@@ -78,7 +78,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
 
 selectedRows.forEach(e => 
   //  fetch(`${}/${e.SerialNumber}`, {
-    fetch(`http://localhost:5000/updates/${e.SerialNumber}`, {
+    fetch(`assetmanager-server-production.up.railway.app/updates/${e.SerialNumber}`, {
         method: "PUT",
         headers: 
         {   "Content-Type": "application/json",
