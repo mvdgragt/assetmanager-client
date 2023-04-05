@@ -42,7 +42,8 @@ const [toggleCleared, setToggleCleared] = useState(false);
    useEffect(() => {
         async function getMovements() {
             const res = await fetch(`assetmanager-server-production.up.railway.app/onloan`, {
-                headers: {
+                headers: 
+                {   "Content-Type": "application/json",
                     'Authorization': `Bearer ${token}`             
                 }
             }
