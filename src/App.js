@@ -49,7 +49,7 @@ function App() {
         //Assign who is allowed to login
         if(  
         user.email.endsWith("miva1000@utb.helsingborg.se") ||
-        user.email.endsWith("katrina.rosales@knowit.se") ||
+        user.email.endsWith("katrinasblogg@gmail.com") ||
         user.email.endsWith("sivi1000@utb.helsingborg.se")
 
         
