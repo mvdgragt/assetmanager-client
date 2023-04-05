@@ -60,7 +60,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     
    useEffect(() => {
         async function getAssets() {
-            const res = await fetch(`assetmanager-server-production.up.railway.app/allAssets`, {
+            const res = await fetch(`${REACT_APP_BACKEND_URL}/allAssets`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,                    
                     'Access-Control-Allow-Origin': '*',
@@ -96,7 +96,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
     const submitButton = useCallback(() => {
 console.log(selectedRows)
         selectedRows.forEach(e => 
-            fetch(`assetmanager-server-production.up.railway.app/deleteasset/${e.SerialNumber}`, {
+            fetch(`${REACT_APP_BACKEND_URL}/deleteasset/${e.SerialNumber}`, {
                 method: "DELETE",
                 headers: 
                 {   "Content-Type": "application/json",
