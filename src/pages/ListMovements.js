@@ -53,6 +53,7 @@ headers:
             );
             const movementsArray = await res.json();
             setData(movementsArray);
+            console.log(movementsArray)
         }
         getMovements();
     }, [toggleCleared]);
