@@ -82,7 +82,7 @@ headers:
 
 selectedRows.forEach(e => 
     //fetch(`${process.env.REACT_APP_BACKEND_URL}/updates/${e.SerialNumber}`, {
-    fetch("https://assetmanager-server-production.up.railway.app/updates/${e.SerialNumber}", {
+    fetch(`https://assetmanager-server-production.up.railway.app/updates/${e.SerialNumber}`, {
         method: "PUT",
         headers: 
         {   "Content-Type": "application/json",
