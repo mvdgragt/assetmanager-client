@@ -43,7 +43,7 @@ const AddMovement = ({token, logoutUser}) => {
   const submit = () => {
     const chosenPersonID = JSON.stringify(chosenPerson[0].ID)
  //  const chosenPersonID = parseInt(chosenPerson[0].ID);
-    const chosenDeviceID = JSON.stringify(chosenDevice[0].id)
+    const chosenDeviceID = JSON.stringify(chosenDevice[0].ID)
 // const chosenDeviceID = parseInt(chosenDevice[0].ID)  
 const data = {chosenPersonID, chosenDeviceID}
     console.log(data)
