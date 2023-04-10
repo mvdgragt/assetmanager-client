@@ -88,7 +88,7 @@ const AddMovement = ({token, logoutUser}) => {
 
 
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="AssetNumber">Asset Number</label>
             <Field className="form-control" name="AssetNumber" />
             {errors.AssetNumber && touched.AssetNumber ? (
@@ -159,7 +159,7 @@ const AddMovement = ({token, logoutUser}) => {
             {errors.CostCenter && touched.CostCenter ? (
               <div>{errors.CostCenter}</div>
             ) : null}
-          </div>
+          </div> */}
           <button type="submit" className='btn btn-success'>Submit</button>
         </Form>
         
