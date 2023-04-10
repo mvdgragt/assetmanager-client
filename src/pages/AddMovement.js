@@ -15,38 +15,46 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddMovement = ({token, logoutUser}) => {
-  const [assetTypeID, setAssetTypeID] = useState([]);
-  const CostCenter = ["EY","PYP","MYP","DP"]
- // console.log(CostCenter)
+    const [chosenPerson, setChosenPerson] = useState([]);
+    const [chosenDevice, setChosenDevice] = useState([]);  
   useEffect(() => {
-    async function getAssetTypes() {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/assettypes`, {
+    async function getPersons() {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/persons`, {
           headers: {
               'Authorization': `Bearer ${token}`
           }
       });
-      const assettypesArray = await res.json();
-    //  console.log(assettypesArray)
-      setAssetTypeID(assettypesArray);
+      const personsArray = await res.json();
+    //  console.log(personsArray)
+    setChosenPerson(personsArray);
   }
-  getAssetTypes();
+
+  async function getDevices() {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allAssets`, {
+
+      headers: {
+          'Authorization': `Bearer ${token}`
+      }
+  });
+    const devicesArray = await response.json();
+    // console.log(devicesArray)
+    setChosenDevice(devicesArray);
+  }
+  getPersons();
+  getDevices();
   }, []);
 
   return (
     <Formik
       initialValues={{
-        AssetNumber: '',
-        SerialNumber: '',
-        PurchaseValue: '',
-        AssetTypeID: '',
-        AssetDescription: '',
-        CostCenter: ''
+        ChosenPerson: '',
+        ChosenDevice: ''
       }}
       validationSchema={validationSchema}
       onSubmit={async (values, {resetForm}) => {
         console.log(values);
         await sleep(500);
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/addNewDevice`, {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement`, {
           method: "POST",
           headers: { "Content-type": "application/json", 'Authorization': `Bearer ${token}` },
           body: JSON.stringify(values),
@@ -61,7 +69,25 @@ const AddMovement = ({token, logoutUser}) => {
         <div className="container mt-5">
           <Navigation logoutUser={logoutUser}/>
         <Form>
-          <h4>Register new Device</h4>
+          <h4>Add New Movement</h4>
+
+          <div className="mb-3">
+            <label htmlFor="chosenPeron">Choose Person</label>
+            <Field  className="form-control" name="ChosenPeron" as="select">
+              <option value="">Choose a person...</option>
+              {chosenPerson.map((option) => (
+                <option key={option.ID} value={option.ID}>
+                  {option.full_name}
+                </option>
+              ))}
+            </Field>
+            {errors.ChosenPeron && touched.ChosenPeron ? (
+              <div>{errors.ChosenPeron}</div>
+            ) : null}
+          </div>
+
+
+
           <div className="mb-3">
             <label htmlFor="AssetNumber">Asset Number</label>
             <Field className="form-control" name="AssetNumber" />
