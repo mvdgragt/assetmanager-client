@@ -122,19 +122,7 @@ const AddMovement = ({token, logoutUser}) => {
 
 {/* show devicetype */}
 
-<div className="mb-3">
-          <label htmlFor="AssetType">Device Type</label>
-          <Typeahead
-            disabled
-            name="AssetType"
-            id="basic-typeahead-single"
-            labelKey={option => `${option.AssetType}`}
-            onChange={setNotUsed}
-            options={devices}
-       //     placeholder="enter the serialNumber..."
-            selected={chosenDevice}
-          />
-        </div>
+
 
           {/* <div className="mb-3">
             <label htmlFor="AssetNumber">Asset Number</label>
