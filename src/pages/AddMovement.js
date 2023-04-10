@@ -92,10 +92,26 @@ const AddMovement = ({token, logoutUser}) => {
 <div className="mb-3">
             <label htmlFor="chosenDevice">Enter Assetnumber</label>
             <Field  className="form-control" name="ChosenDevice" as="select">
-              <option value="">enter the assetnumber...</option>
+              <option value="">enter the Assetnumber...</option>
               {chosenDevice.map((option) => (
                 <option key={option.ID} value={option.ID}>
                   {option.AssetNumber}
+                </option>
+              ))}
+            </Field>
+            {errors.ChosenDevice && touched.ChosenDevice ? (
+              <div>{errors.ChosenDevice}</div>
+            ) : null}
+          </div>
+
+          {/* choose device */}
+<div className="mb-3">
+            <label htmlFor="chosenDevice">Enter Serialnumber</label>
+            <Field  className="form-control" name="ChosenDevice" as="select">
+              <option value="">enter the serialnumber...</option>
+              {chosenDevice.map((option) => (
+                <option key={option.ID} value={option.ID}>
+                  {option.SerialNumber}
                 </option>
               ))}
             </Field>
