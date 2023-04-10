@@ -71,9 +71,11 @@ const AddMovement = ({token, logoutUser}) => {
         <Form>
           <h4>Add New Movement</h4>
 
+
+{/* choose person */}
           <div className="mb-3">
-            <label htmlFor="chosenPeron">Choose Person</label>
-            <Field  className="form-control" name="ChosenPeron" as="select">
+            <label htmlFor="chosenPerson">Choose Person</label>
+            <Field  className="form-control" name="ChosenPerson" as="select">
               <option value="">Choose a person...</option>
               {chosenPerson.map((option) => (
                 <option key={option.ID} value={option.ID}>
@@ -81,11 +83,26 @@ const AddMovement = ({token, logoutUser}) => {
                 </option>
               ))}
             </Field>
-            {errors.ChosenPeron && touched.ChosenPeron ? (
-              <div>{errors.ChosenPeron}</div>
+            {errors.ChosenPerson && touched.ChosenPerson ? (
+              <div>{errors.ChosenPerson}</div>
             ) : null}
           </div>
 
+{/* choose device */}
+<div className="mb-3">
+            <label htmlFor="chosenDevice">Enter Assetnumber</label>
+            <Field  className="form-control" name="ChosenDevice" as="select">
+              <option value="">enter the assetnumber...</option>
+              {chosenDevice.map((option) => (
+                <option key={option.ID} value={option.ID}>
+                  {option.AssetNumber}
+                </option>
+              ))}
+            </Field>
+            {errors.ChosenDevice && touched.ChosenDevice ? (
+              <div>{errors.ChosenDevice}</div>
+            ) : null}
+          </div>
 
 
           {/* <div className="mb-3">
