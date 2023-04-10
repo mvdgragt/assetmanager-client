@@ -88,7 +88,7 @@ const AddMovement = ({token, logoutUser}) => {
             ) : null}
           </div>
 
-{/* choose device */}
+{/* choose assetnumber */}
 <div className="mb-3">
             <label htmlFor="chosenDevice">Enter Assetnumber</label>
             <Field  className="form-control" name="ChosenDevice" as="select">
@@ -104,7 +104,7 @@ const AddMovement = ({token, logoutUser}) => {
             ) : null}
           </div>
 
-          {/* choose device */}
+{/* choose serialnumber */}
 <div className="mb-3">
             <label htmlFor="chosenDevice">Enter Serialnumber</label>
             <Field  className="form-control" name="ChosenDevice" as="select">
@@ -120,6 +120,21 @@ const AddMovement = ({token, logoutUser}) => {
             ) : null}
           </div>
 
+{/* show devicetype */}
+
+<div className="mb-3">
+          <label htmlFor="AssetType">Device Type</label>
+          <Typeahead
+            disabled
+            name="AssetType"
+            id="basic-typeahead-single"
+            labelKey={option => `${option.AssetType}`}
+            onChange={setNotUsed}
+            options={devices}
+       //     placeholder="enter the serialNumber..."
+            selected={chosenDevice}
+          />
+        </div>
 
           {/* <div className="mb-3">
             <label htmlFor="AssetNumber">Asset Number</label>
