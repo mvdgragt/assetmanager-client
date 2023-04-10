@@ -47,11 +47,12 @@ const AddMovement = ({token, logoutUser}) => {
  const chosenDeviceID = parseInt(chosenDevice[0].ID)  
 const data = {chosenPersonID, chosenDeviceID}
     console.log(data)
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement/`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement`, {
       method: "POST",
       headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
       body: JSON.stringify(data),
     });
+    
 //    alert(JSON.stringify(data, null, 2));
 alert(JSON.stringify(data));
 
