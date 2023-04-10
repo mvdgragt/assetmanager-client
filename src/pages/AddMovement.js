@@ -1,143 +1,146 @@
-import React, { useState, useEffect } from "react";
-import { Typeahead } from 'react-bootstrap-typeahead';
-import Navigation from "../components/Navigation";
+import React, { useState, useEffect } from 'react';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import Navigation from '../components/Navigation';
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+
+const validationSchema = Yup.object().shape({
+  AssetNumber: Yup.string().required('Asset number is required'),
+  SerialNumber: Yup.string().required('Serial number is required'),
+  PurchaseValue: Yup.number().required('Purchase Value is required'),
+  AssetTypeID: Yup.number().required('Asset Type is required'),
+  AssetDescription: Yup.string().required('Asset Description  is required'),
+  CostCenter: Yup.string().required('Cost Center is required'),
+});
 
 const AddMovement = ({token, logoutUser}) => {
-
-  const [persons, setPersons] = useState([]);
-  const [chosenPerson, setChosenPerson] = useState([]);
-  const [devices, setDevices] = useState([]);
-  const [chosenDevice, setChosenDevice] = useState([]);  
-  const [notUsed,setNotUsed] = useState([])
-
-  //get all registered persons
+  const [assetTypeID, setAssetTypeID] = useState([]);
+  const CostCenter = ["EY","PYP","MYP","DP"]
+ // console.log(CostCenter)
   useEffect(() => {
-    async function fetchPersons() {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/persons`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-      const data = await response.json();
-      setPersons(data);
-      console.log("persons :", data[0])
-    }
-
-    async function fetchDevices() {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allAssets`, {
-
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-      const data = await response.json();
-      console.log("allassets :", data[0])
-      setDevices(data);
-    }
-
-
-    fetchPersons();
-    fetchDevices();
+    async function getAssetTypes() {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/assettypes`, {
+          headers: {
+              'Authorization': `Bearer ${token}`
+          }
+      });
+      const assettypesArray = await res.json();
+    //  console.log(assettypesArray)
+      setAssetTypeID(assettypesArray);
+  }
+  getAssetTypes();
   }, []);
 
-  const submit = () => {
- //   const chosenPersonID = JSON.stringify(chosenPerson[0].ID)
-   const chosenPersonID = parseInt(chosenPerson[0].ID);
- //   const chosenDeviceID = JSON.stringify(chosenDevice[0].id)
- const chosenDeviceID = parseInt(chosenDevice[0].ID)  
-const data = {chosenPersonID, chosenDeviceID}
-    console.log(data)
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement`, {
-      method: "POST",
-      headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
-      body: JSON.stringify(data),
-    });
-    
-//    alert(JSON.stringify(data, null, 2));
-alert(JSON.stringify(data));
-
-  };
-
   return (
-    <>
-      <form className="container mt-5">
-      <Navigation logoutUser={logoutUser}/>
-      <h4>Add New Movement</h4>
-        <div className="mb-3">
-          <label htmlFor="Person">Choose Person</label>
-          <Typeahead
-            name="Person"
-            id="basic-typeahead-single"
-            labelKey={option => `${option.full_name}`}
-            onChange={setChosenPerson}
-            options={persons}
-            placeholder="Choose a person..."
-            selected={chosenPerson}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="Assetnumber">Enter Assetnumber</label>
-          <Typeahead
-            name="Assetnumber"
-            id="basic-typeahead-single"
-            labelKey={option => `${option.AssetNumber}`}
-            onChange={setChosenDevice}
-            options={devices}
-            placeholder="enter the assetnumber..."
-            selected={chosenDevice}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="SerialNumber">Enter Serialnumber</label>
-          <Typeahead
-            name="Serialnumber"
-            id="basic-typeahead-single"
-            labelKey={option => `${option.SerialNumber}`}
-            onChange={setChosenDevice}
-            options={devices}
-            placeholder="enter the serialNumber..."
-            selected={chosenDevice}
-          />
-        </div>
+    <Formik
+      initialValues={{
+        AssetNumber: '',
+        SerialNumber: '',
+        PurchaseValue: '',
+        AssetTypeID: '',
+        AssetDescription: '',
+        CostCenter: ''
+      }}
+      validationSchema={validationSchema}
+      onSubmit={async (values, {resetForm}) => {
+        console.log(values);
+        await sleep(500);
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/addNewDevice`, {
+          method: "POST",
+          headers: { "Content-type": "application/json", 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify(values),
+        });
+        alert(JSON.stringify(values, null, 2));
+                  console.log(values);
+        resetForm(); //Resets the form data
+        // submit logic here
+      }}
+    >
+      {({ errors, touched }) => (
+        <div className="container mt-5">
+          <Navigation logoutUser={logoutUser}/>
+        <Form>
+          <h4>Register new Device</h4>
+          <div className="mb-3">
+            <label htmlFor="AssetNumber">Asset Number</label>
+            <Field className="form-control" name="AssetNumber" />
+            {errors.AssetNumber && touched.AssetNumber ? (
+              <div>{errors.AssetNumber}</div>
+            ) : null}
+          </div>
+          <div className="mb-3">
+            <label htmlFor="SerialNumber">Serial Number</label>
+            <Field  className="form-control" name="SerialNumber" />
+            {errors.SerialNumber && touched.SerialNumber ? (
+              <div>{errors.SerialNumber}</div>
+            ) : null}
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="AssetType">Device Type</label>
-          <Typeahead
-            disabled
-            name="AssetType"
-            id="basic-typeahead-single"
-            labelKey={option => `${option.AssetType}`}
-            onChange={setNotUsed}
-            options={devices}
-            placeholder="enter the serialNumber..."
-            selected={chosenDevice}
+          <div className="mb-3">
+          <label htmlFor="PurchaseValue">Purchase Value</label>
+          <Field
+            name="PurchaseValue"
+            type="number"
+            className="form-control"
+            placeholder="Enter Purchase Value"
           />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="CostCenter">Cost Center</label>
-          <Typeahead
-            disabled
-            name="CostCenter"
-            id="basic-typeahead-single"
-            labelKey={option => `${option.CostCenter}`}
-            onChange={setNotUsed}
-            options={devices}
-            placeholder="CostCenter"
-            selected={chosenDevice}
-          />
+           {errors.PurchaseValue && touched.PurchaseValue ? (
+              <div>{errors.PurchaseValue}</div>
+            ) : null}
         </div>
 
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={submit}
-        >Submit</button>
-      </form>
-    </>
-  )
+          <div className="mb-3">
+            <label htmlFor="assetTypeID">Asset Type</label>
+            <Field  className="form-control" name="AssetTypeID" as="select">
+              <option value="">Choose asset type</option>
+              {assetTypeID.map((option) => (
+                <option key={option.ID} value={option.ID}>
+                  {option.AssetType}
+                </option>
+              ))}
+            </Field>
+            {errors.AssetTypeID && touched.AssetTypeID ? (
+              <div>{errors.AssetTypeID}</div>
+            ) : null}
+          </div>
+
+          <div className="mb-3">
+          <label htmlFor="AssetDescription">Asset Description</label>
+          <Field
+            name="AssetDescription"
+            type="text"
+            className="form-control"
+            placeholder="Enter Asset Description"
+          />
+           {errors.AssetDescription && touched.AssetDescription ? (
+              <div>{errors.AssetDescription}</div>
+            ) : null}
+        </div>
+
+
+          <div className="mb-3">
+            <label htmlFor="CostCenter">Cost Center</label>
+            <Field  className="form-control" name="CostCenter" as="select">
+              <option value="">Choose costcenter</option>
+              {CostCenter.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </Field>
+            {errors.CostCenter && touched.CostCenter ? (
+              <div>{errors.CostCenter}</div>
+            ) : null}
+          </div>
+          <button type="submit" className='btn btn-success'>Submit</button>
+        </Form>
+        
+        </div>
+      )}
+    </Formik>
+  );
 };
-
 
 export default AddMovement;
