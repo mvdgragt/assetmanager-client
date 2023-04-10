@@ -50,7 +50,7 @@ const data = {chosenPersonID, chosenDeviceID}
     fetch(`${process.env.REACT_APP_BACKEND_URL}/newMovement/`, {
       method: "POST",
       headers: { "Content-type": "application/json",  'Authorization': `Bearer ${token}` },
-      body: JSON.stringify(chosenDeviceID,chosenPersonID),
+      body: JSON.stringify(data),
     });
 //    alert(JSON.stringify(data, null, 2));
 alert(JSON.stringify(data));
