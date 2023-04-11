@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import DataTable from 'react-data-table-component';
 import Navigation from "../components/Navigation";
-import { XLSX } from "xlsx";
+import * as XLSX from 'xlsx';
 
 
 const ListMovements = ({token, logoutUser}) => {
