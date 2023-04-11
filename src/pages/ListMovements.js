@@ -3,6 +3,8 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import DataTable from 'react-data-table-component';
 import Navigation from "../components/Navigation";
+import { XLSX } from "xlsx";
+
 
 const ListMovements = ({token, logoutUser}) => {
 
@@ -37,7 +39,6 @@ const [data, setData] = useState([]);
 const [filteredData, setFilteredData] = useState([]);
 const [selectedRows, setSelectedRows] = useState([])
 const [toggleCleared, setToggleCleared] = useState(false);
-
 
 const downloadXLS = () => {
     const ws = XLSX.utils.json_to_sheet(this.myJsonDataArray);
@@ -126,9 +127,10 @@ selectedRows.forEach(e =>
         
             <header>
             <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />         
-            <Button onClick={() => downloadXLS()}>Export</Button>  
 
 </header>
+<Button onClick={() => downloadXLS()}>Export</Button>  
+
             <DataTable
             title="All Devices on Loan"
             defaultSortFieldId={1}
