@@ -129,7 +129,7 @@ selectedRows.forEach(e =>
             <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />         
 
 </header>
-<Button onClick={() => downloadXLS()}>Export</Button>  
+<button onClick={() => downloadXLS()}>Export</button>  
 
             <DataTable
             title="All Devices on Loan"
