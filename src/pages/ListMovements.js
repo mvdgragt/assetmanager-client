@@ -79,7 +79,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
 
 selectedRows.forEach(e => 
   //  fetch(`${}/${e.SerialNumber}`, {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/updates/${e.SerialNumber}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/updates/${e.ID}`, {
         method: "PUT",
         headers: 
         {   "Content-Type": "application/json",
