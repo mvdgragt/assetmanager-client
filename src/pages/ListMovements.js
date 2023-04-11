@@ -114,7 +114,7 @@ selectedRows.forEach(e =>
     return(
 <div>
 
-<button className="btn btn-info" onClick={() => downloadXLS()}>Export</button>  
+<button className="btn btn-info mr-1" onClick={() => downloadXLS()}>Export</button>  
 <button className="btn btn-danger" onClick = {submitButton } style={{ backgroundColor: 'red' }}>
 				Book In
 			</button>
