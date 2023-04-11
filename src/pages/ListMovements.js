@@ -5,11 +5,12 @@ import DataTable from 'react-data-table-component';
 import Navigation from "../components/Navigation";
 import { handleDownloadExcel } from "../components/Excel";
 
+const downloadExcel = () => {
+    handleDownloadExcel(dataSource,"SHEET_NAME","MY_FILENAME")  
+};
+
 const ListMovements = ({token, logoutUser}) => {
 
-    const downloadExcel = () => {
-        handleDownloadExcel(dataSource,"SHEET_NAME","MY_FILENAME")  
-    };
 
 const columns = [
     {
