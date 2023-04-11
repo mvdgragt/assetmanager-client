@@ -112,10 +112,14 @@ selectedRows.forEach(e =>
     const contextActions = useMemo(() => {
  
     return(
+<div>
 
-        <button className="btn btn-danger" onClick = {submitButton } style={{ backgroundColor: 'red' }}>
+<button className="btn btn-info" onClick={() => downloadXLS()}>Export</button>  
+<button className="btn btn-danger" onClick = {submitButton } style={{ backgroundColor: 'red' }}>
 				Book In
 			</button>
+
+</div>
    
     )
     },[submitButton])
@@ -129,7 +133,6 @@ selectedRows.forEach(e =>
             <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />         
 
 </header>
-<button onClick={() => downloadXLS()}>Export</button>  
 
             <DataTable
             title="All Devices on Loan"
