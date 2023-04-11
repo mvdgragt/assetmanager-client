@@ -41,7 +41,7 @@ const [selectedRows, setSelectedRows] = useState([])
 const [toggleCleared, setToggleCleared] = useState(false);
 
 const downloadXLS = () => {
-    const ws = XLSX.utils.json_to_sheet(this.myJsonDataArray);
+    const ws = XLSX.utils.json_to_sheet(this.data);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "movements");
     XLSX.writeFile(wb, 'reports.xlsx');
