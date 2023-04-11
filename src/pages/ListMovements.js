@@ -3,8 +3,13 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import DataTable from 'react-data-table-component';
 import Navigation from "../components/Navigation";
+import { handleDownloadExcel } from "../components/Excel";
 
 const ListMovements = ({token, logoutUser}) => {
+
+    const downloadExcel = () => {
+        handleDownloadExcel(dataSource,"SHEET_NAME","MY_FILENAME")  
+    };
 
 const columns = [
     {
@@ -103,14 +108,11 @@ selectedRows.forEach(e =>
     const contextActions = useMemo(() => {
  
     return(
-      <div>
+
         <button className="btn btn-danger" onClick = {submitButton } style={{ backgroundColor: 'red' }}>
 				Book In
 			</button>
-                <button className="btn btn-danger" onClick = {submitButton } style={{ backgroundColor: 'red' }}>
-				Export
-			</button>
-            </div>
+   
     )
     },[submitButton])
 
@@ -123,6 +125,7 @@ selectedRows.forEach(e =>
             <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />           
 
 </header>
+<Button type={'button'} className="btn-sm float-end mx-2" text="Excel" onClick={downloadExcel}  />  
             <DataTable
             title="All Devices on Loan"
             defaultSortFieldId={1}
