@@ -38,6 +38,14 @@ const [filteredData, setFilteredData] = useState([]);
 const [selectedRows, setSelectedRows] = useState([])
 const [toggleCleared, setToggleCleared] = useState(false);
 
+
+const downloadXLS = () => {
+    const ws = XLSX.utils.json_to_sheet(this.myJsonDataArray);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "movements");
+    XLSX.writeFile(wb, 'reports.xlsx');
+  }
+
     // getMovements()
     
    useEffect(() => {
@@ -98,8 +106,7 @@ selectedRows.forEach(e =>
        useEffect(() => {
          filterData(searchTerm);
        }, [searchTerm, filterData]);
-       
-    
+         
 
     const contextActions = useMemo(() => {
  
@@ -118,7 +125,8 @@ selectedRows.forEach(e =>
         <Navigation logoutUser={logoutUser}/>
         
             <header>
-            <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />           
+            <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />         
+            <Button onClick={() => downloadXLS()}>Export</Button>  
 
 </header>
             <DataTable
