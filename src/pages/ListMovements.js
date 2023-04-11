@@ -130,6 +130,8 @@ selectedRows.forEach(e =>
             contextActions={contextActions}
             clearSelectedRows={toggleCleared}
             responsive
+            highlightOnHover
+		pointerOnHover
             />
         </div>
 
