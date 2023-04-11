@@ -27,7 +27,7 @@ const [toggleCleared, setToggleCleared] = useState(false);
   
    useEffect(() => {
         async function getPersons() {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/allPersons`, {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/persons`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
