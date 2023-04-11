@@ -103,9 +103,13 @@ selectedRows.forEach(e =>
     const contextActions = useMemo(() => {
  
     return(
+        <>
+        <Export onExport={() => downloadCSV(data)} />
+        
         <button className="btn btn-danger" onClick = {submitButton } style={{ backgroundColor: 'red' }}>
 				Book In
 			</button>
+            </>
     )
     },[submitButton])
 
@@ -131,7 +135,6 @@ selectedRows.forEach(e =>
             clearSelectedRows={toggleCleared}
             responsive
             highlightOnHover
-		pointerOnHover
             />
         </div>
 
