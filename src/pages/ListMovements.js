@@ -112,14 +112,12 @@ selectedRows.forEach(e =>
     const contextActions = useMemo(() => {
  
     return(
-<div>
-
-<button className="btn btn-info mr-1" onClick={() => downloadXLS()}>Export</button>  
-<button className="btn btn-danger" onClick = {submitButton } style={{ backgroundColor: 'red' }}>
-				Book In
-			</button>
-
+        
+<div class="d-flex justify-content-center">
+  <button class="btn btn-info me-3" onClick={() => downloadXLS()}>Export</button>  
+  <button class="btn btn-danger" onClick={submitButton} style={{ backgroundColor: 'red' }}>Book In</button>
 </div>
+
    
     )
     },[submitButton])
