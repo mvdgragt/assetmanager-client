@@ -8,7 +8,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const RegisterPersonForm = ({token, logoutUser}) => {
   return (
     <Formik
-      initialValues={{ FirstName: '', LastName: '', Email: '' }}
+      initialValues={{ FirstName: '', LastName: '' }}
       validationSchema={Yup.object({
         FirstName: Yup.string()
           .max(50, 'Must be 50 characters or less')
@@ -16,7 +16,7 @@ const RegisterPersonForm = ({token, logoutUser}) => {
         LastName: Yup.string()
           .max(50, 'Must be 50 characters or less')
           .required('Required'),
-        Email: Yup.string().email('Invalid email address').required('Required'),
+        // Email: Yup.string().email('Invalid email address').required('Required'),
       })}
 
       onSubmit={async (values, { resetForm }) => {
@@ -57,7 +57,7 @@ const RegisterPersonForm = ({token, logoutUser}) => {
           <ErrorMessage name="lastName" />
         </div>
 
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="Email">Email Address</label>
           <Field
             name="Email"
@@ -66,7 +66,7 @@ const RegisterPersonForm = ({token, logoutUser}) => {
             placeholder="Enter lastname"
           />
           <ErrorMessage name="email" />
-        </div>
+        </div> */}
 
         <button
           type="submit"
