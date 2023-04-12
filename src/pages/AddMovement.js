@@ -54,7 +54,7 @@ const data = {chosenPersonID, chosenDeviceID}
     });
     
 //    alert(JSON.stringify(data, null, 2));
-// alert(JSON.stringify(data));
+alert(JSON.stringify(data));
 
   };
 
