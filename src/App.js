@@ -19,8 +19,6 @@ function App() {
 
   const [authorizedUser,setAuthorizedUser] = useState(false || sessionStorage.getItem("accessToken"));
 
-
-
   const signInwithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -41,9 +39,25 @@ function App() {
         setAuthorizedUser(true);
       })
          }
+   
 
 
-       
+        //Assign who is allowed to login
+        // if(  
+        // user.email.endsWith("miva1000@utb.helsingborg.se") ||
+        // user.email.endsWith("katrinasblogg@gmail.com") ||
+        // user.email.endsWith("sivi1000@utb.helsingborg.se")
+
+        
+        // ){
+        //   user.getIdToken().then((tkn)=>{
+        //     // set access token in session storage
+        //     sessionStorage.setItem("accessToken", tkn);
+        //     setAuthorizedUser(true);
+        //   })
+        // }
+
+
       })
   }
   const logoutUser = () => {
