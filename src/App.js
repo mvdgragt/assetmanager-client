@@ -17,8 +17,8 @@ function App() {
   provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
   const auth = getAuth();
 
-  //const [authorizedUser,setAuthorizedUser] = useState(false || sessionStorage.getItem("accessToken"));
-  const [authorizedUser, setAuthorizedUser] = useState(sessionStorage.getItem("accessToken") !== null);
+  const [authorizedUser,setAuthorizedUser] = useState(false || sessionStorage.getItem("accessToken"));
+
 
 
   const signInwithGoogle = () => {
