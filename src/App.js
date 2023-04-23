@@ -22,7 +22,11 @@ function App() {
   const signInwithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-    
+       // The signed-in user info.
+        const user = result.user;
+       // setUser(user)
+        console.log("user :",user.displayName)
+      
        //Assign who is allowed to login
         if(  
         user.email.endsWith("miva1000@utb.helsingborg.se") ||
@@ -36,10 +40,7 @@ function App() {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         // Access token of user
         const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-       // setUser(user)
-        console.log("user :",user.displayName)
+     
         console.log("token :", token)
       
           })
