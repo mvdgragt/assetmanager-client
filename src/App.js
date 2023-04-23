@@ -31,13 +31,13 @@ function App() {
        // setUser(user)
         console.log("user :",user.displayName)
         console.log("token :", token)
-        // if(user){
-        //   user.getIdToken().then((tkn)=>{
-        //     // set access token in session storage
-        //     sessionStorage.setItem("accessToken", tkn);
-        //     setAuthorizedUser(true);
-        //   })
-        // }
+         if(user.email.endsWith("miva1000@utb.helsingborg.se") ){
+           user.getIdToken().then((tkn)=>{
+             // set access token in session storage
+             sessionStorage.setItem("accessToken", tkn);
+             setAuthorizedUser(true);
+           })
+         }
         // Refresh token logic
       user.getIdToken(/* forceRefresh */ true).then((tkn)=>{
         // set access token in session storage
@@ -47,19 +47,19 @@ function App() {
 
 
         //Assign who is allowed to login
-        if(  
-        user.email.endsWith("miva1000@utb.helsingborg.se") ||
-        user.email.endsWith("katrinasblogg@gmail.com") ||
-        user.email.endsWith("sivi1000@utb.helsingborg.se")
+     //   if(  
+     //  user.email.endsWith("miva1000@utb.helsingborg.se") ||
+     //   user.email.endsWith("katrinasblogg@gmail.com") ||
+     //   user.email.endsWith("sivi1000@utb.helsingborg.se")
 
         
-        ){
-          user.getIdToken().then((tkn)=>{
+     //   ){
+     //     user.getIdToken().then((tkn)=>{
             // set access token in session storage
-            sessionStorage.setItem("accessToken", tkn);
-            setAuthorizedUser(true);
-          })
-        }
+     //       sessionStorage.setItem("accessToken", tkn);
+     //       setAuthorizedUser(true);
+     //     })
+     //   }
 
 
       })
