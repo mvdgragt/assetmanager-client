@@ -17,9 +17,8 @@ function App() {
   provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
   const auth = getAuth();
 
-  //const [authorizedUser,setAuthorizedUser] = useState(false || sessionStorage.getItem("accessToken"));
-  const [authorizedUser,setAuthorizedUser] = useState(false);
-
+  const [authorizedUser,setAuthorizedUser] = useState(false || sessionStorage.getItem("accessToken"));
+  
   const signInwithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -84,7 +83,7 @@ else {
           {/* <p>Welcome {user.displayName}</p>
           <button onClick={logoutUser}>Logout Button</button> */}
 
-      <Route path="/" element={<ListMovements token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
+      <Route path="/" element={authorizedUser ? <ListMovements token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="/persons" element={<RegisterPersonForm token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="/devices" element={<RegisterDeviceForm token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
       <Route path="registermovement" element={<AddMovement token={sessionStorage.getItem("accessToken")} logoutUser={logoutUser}/>} />
