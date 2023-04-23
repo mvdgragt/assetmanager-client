@@ -31,33 +31,14 @@ function App() {
        // setUser(user)
         console.log("user :",user.displayName)
         console.log("token :", token)
-         if(user.email.endsWith("miva1000@utb.helsingborg.se || sivi1000@utb.helsingborg.se")){
-               // Refresh token logic
-      user.getIdToken(/* forceRefresh */ true).then((tkn)=>{
-        // set access token in session storage
-        sessionStorage.setItem("accessToken", tkn);
-        setAuthorizedUser(true);
-      })
+         if(user.email.endsWith("miva1000@utb.helsingborg.se" || "sivi1000@utb.helsingborg")){
+           user.getIdToken().then((tkn)=>{
+             // set access token in session storage
+             sessionStorage.setItem("accessToken", tkn);
+             setAuthorizedUser(true);
+           })
          }
-   
-
-
-        //Assign who is allowed to login
-        // if(  
-        // user.email.endsWith("miva1000@utb.helsingborg.se") ||
-        // user.email.endsWith("katrinasblogg@gmail.com") ||
-        // user.email.endsWith("sivi1000@utb.helsingborg.se")
-
-        
-        // ){
-        //   user.getIdToken().then((tkn)=>{
-        //     // set access token in session storage
-        //     sessionStorage.setItem("accessToken", tkn);
-        //     setAuthorizedUser(true);
-        //   })
-        // }
-
-
+  
       })
   }
   const logoutUser = () => {
