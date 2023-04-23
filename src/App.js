@@ -43,7 +43,7 @@ function App() {
         // set access token in session storage
       //  sessionStorage.setItem("accessToken", tkn);
       //  setAuthorizedUser(true);
-      })
+      // })
 
 
         //Assign who is allowed to login
