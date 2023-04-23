@@ -22,16 +22,7 @@ function App() {
   const signInwithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        // This gives you a Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        // Access token of user
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-       // setUser(user)
-        console.log("user :",user.displayName)
-        console.log("token :", token)
-      
+    
        //Assign who is allowed to login
         if(  
         user.email.endsWith("miva1000@utb.helsingborg.se") ||
@@ -41,6 +32,16 @@ function App() {
             // set access token in session storage
             sessionStorage.setItem("accessToken", tkn);
             setAuthorizedUser(true);
+                // This gives you a Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        // Access token of user
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+       // setUser(user)
+        console.log("user :",user.displayName)
+        console.log("token :", token)
+      
           })
           
         }
