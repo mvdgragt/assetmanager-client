@@ -43,7 +43,7 @@ function App() {
         // set access token in session storage
         sessionStorage.setItem("accessToken", tkn);
         setAuthorizedUser(true);
-        // })
+        })
 
 
         //Assign who is allowed to login
@@ -60,6 +60,8 @@ function App() {
         }
 else {
   console.log("You are not authorized to log in.");
+  setAuthorizedUser(false);
+          sessionStorage.removeItem("accessToken");
 }
 
       })
