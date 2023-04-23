@@ -20,46 +20,27 @@ function App() {
   //const [authorizedUser,setAuthorizedUser] = useState(false || sessionStorage.getItem("accessToken"));
   const [authorizedUser, setAuthorizedUser] = useState(sessionStorage.getItem("accessToken") !== null);
 
+
   const signInwithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-       // The signed-in user info.
-        const user = result.user;
-       // setUser(user)
-        console.log("user :",user.displayName)
-      
-       //Assign who is allowed to login
-        if(  
-        user.email.endsWith("miva1000@utb.helsingborg.se") ||
-        user.email.endsWith("sivi1000@utb.helsingborg.se")       
-        ){
-          user.getIdToken().then((tkn)=>{
-            // set access token in session storage
-            sessionStorage.setItem("accessToken", tkn);
-            setAuthorizedUser(true);
-                // This gives you a Access Token. You can use it to access the Google API.
+        // This gives you a Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         // Access token of user
         const token = credential.accessToken;
-     
+        // The signed-in user info.
+        const user = result.user;
+       // setUser(user)
+        console.log("user :",user.displayName)
         console.log("token :", token)
-      
-          })
-          
-        }
-else {
-  console.log("You are not authorized to log in.");
-  setAuthorizedUser(false);
-          sessionStorage.removeItem("accessToken");
-}
-
-      
-        // Refresh token logic
-        user.getIdToken(/* forceRefresh */ true).then((tkn)=>{
+         if(user.email.endsWith("miva1000@utb.helsingborg.se || sivi1000@utb.helsingborg.se")){
+               // Refresh token logic
+      user.getIdToken(/* forceRefresh */ true).then((tkn)=>{
         // set access token in session storage
         sessionStorage.setItem("accessToken", tkn);
         setAuthorizedUser(true);
-        })
+      })
+         }
 
 
        
