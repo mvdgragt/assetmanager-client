@@ -31,7 +31,10 @@ function App() {
        // setUser(user)
         console.log("user :",user.displayName)
         console.log("token :", token)
-         if(user.email.endsWith("miva1000@utb.helsingborg.se") ){
+         if(
+        user.email.endsWith("miva1000@utb.helsingborg.se") ||
+        user.email.endsWith("sivi1000@utb.helsingborg.se") 
+         ){
            user.getIdToken().then((tkn)=>{
              // set access token in session storage
              sessionStorage.setItem("accessToken", tkn);
