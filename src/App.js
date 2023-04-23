@@ -39,10 +39,10 @@ function App() {
         //   })
         // }
         // Refresh token logic
-        // user.getIdToken(/* forceRefresh */ true).then((tkn)=>{
+        user.getIdToken(/* forceRefresh */ true).then((tkn)=>{
         // set access token in session storage
-        // sessionStorage.setItem("accessToken", tkn);
-        // setAuthorizedUser(true);
+        sessionStorage.setItem("accessToken", tkn);
+        setAuthorizedUser(true);
         // })
 
 
