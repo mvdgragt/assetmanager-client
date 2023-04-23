@@ -62,7 +62,7 @@ else {
   console.log("You are not authorized to log in.");
 }
 
-      })
+      });
   }
   const logoutUser = () => {
     signOut(auth).then(() => {      
