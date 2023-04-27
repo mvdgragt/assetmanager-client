@@ -33,6 +33,12 @@ const columns = [
         sortable: true,
 
     },
+    {
+        name: 'Loan Out Date',
+        selector: row => row.BookOutDate,
+        sortable: true,
+        cell: (row) => row.BookOutDate.substring(0, 10),
+    },
 ];
 
 const [data, setData] = useState([]);
@@ -113,9 +119,9 @@ selectedRows.forEach(e =>
  
     return(
         
-<div class="d-flex justify-content-center">
-  <button class="btn btn-info me-3" onClick={() => downloadXLS()}>Export</button>  
-  <button class="btn btn-danger" onClick={submitButton} style={{ backgroundColor: 'red' }}>Book In</button>
+<div className="d-flex justify-content-center">
+  <button className="btn btn-info me-3" onClick={() => downloadXLS()}>Export</button>  
+  <button className="btn btn-danger" onClick={submitButton} style={{ backgroundColor: 'red' }}>Book In</button>
 </div>
 
    
@@ -128,13 +134,15 @@ selectedRows.forEach(e =>
         <Navigation logoutUser={logoutUser}/>
         
             <header>
-            <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />         
+            <input type="text"  className="form-control" placeholder="Filter..." onChange={handleSearch} />  
+                   
 
 </header>
 
             <DataTable
             title="All Devices on Loan"
-            defaultSortFieldId={1}
+            defaultSortFieldId={5}
+            defaultSortAsc={false}
             pagination
             columns={columns}
             data={filteredData}
