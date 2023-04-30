@@ -83,7 +83,7 @@ const UploadExcel = ({logoutUser}) => {
   const [excelFileError, setExcelFileError] = useState(null);
   const [totalCost,setTotalCost] = useState(null);
   const [newAssets,setNewAssets] = useState([]);
-  const [pending, setPending] = useState(false);
+  const [pending, setPending] = useState(true);
 
   // const [payThisMonth,setPayThisMonth] = useState(0);
 
@@ -203,28 +203,6 @@ const uploadBatch = async (batch) => {
 
 const updateAssetsTable = async () => {
   console.log("updating assetstable")
-
- const result =  await fetch(`${process.env.REACT_APP_BACKEND_URL}/truncateAssetsNotInSpreadsheet`, {
-    method: "DELETE",
-    headers: {
-        'Authorization': `Bearer ${token}`,                    
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                
-    }
-});
- const removingAssets = await result.json()
- console.log("removing : ", removingAssets)
-
-// const result =  await fetch(`${process.env.REACT_APP_BACKEND_URL}/truncateAssetsNotInSpreadsheet`, {
-//   method: "GET",
-//   headers: {
-//       'Authorization': `Bearer ${token}`,                    
-//       'Access-Control-Allow-Origin': '*',
-//       'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                
-//   }
-// });
-// const removingAssets = await result.json()
-// console.log("removing : ", removingAssets)
  
   const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/showNewAssets`, {
     headers: {
@@ -237,11 +215,26 @@ const newAssets = await res.json();
   const timeout = setTimeout(() => {
     setNewAssets(newAssets);
     setPending(false);
+
+    // deleting unmatched assets
+    
   }, 2000);
+
+  const result =  await fetch(`${process.env.REACT_APP_BACKEND_URL}/truncateAssetsNotInSpreadsheet`, {
+    method: "DELETE",
+    headers: {
+        'Authorization': `Bearer ${token}`,                    
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                
+    }
+});
+ const removingAssets = await result.json()
+ console.log("removing : ", removingAssets)
+ 
   return () => clearTimeout(timeout)
+
+  
 }
-
-
 
 const uploadData =  () => {
   for (let i = 0; i < numBatches; i++) {
@@ -256,6 +249,7 @@ const uploadData =  () => {
 
   }
   updateAssetsTable()
+  console.log("done!")
 };
 
 uploadData();
@@ -303,7 +297,7 @@ uploadData();
 
   } catch (error) {
     console.error(error);
-  }
+  } 
   }
 
 
@@ -337,7 +331,7 @@ uploadData();
       }
 
 
-{excelData !== 0 && <DataTable
+{excelFile && <DataTable
         title="New Devices"
         defaultSortFieldId="PurchaseDate"
         defaultSortAsc={false}
@@ -357,8 +351,8 @@ uploadData();
      
       <div className="d-grid gap-2 col-6 mx-auto">
        
-      <Button variant="success" className="btn-lg" onClick={submit}>Add</Button>
-
+     {!pending && newAssets.length > 0 && <Button variant="success" className="btn-lg" onClick={submit}>Add</Button> 
+    }
       </div>
 
 
