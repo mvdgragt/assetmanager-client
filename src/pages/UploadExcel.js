@@ -228,8 +228,8 @@ const newAssets = await res.json();
 //        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',                
 //    }
 // });
- const removingAssets = await result.json()
- console.log("removing : ", removingAssets)
+// const removingAssets = await result.json()
+// console.log("removing : ", removingAssets)
  
   return () => clearTimeout(timeout)
 
